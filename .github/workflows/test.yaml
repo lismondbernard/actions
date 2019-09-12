@@ -1,0 +1,22 @@
+name: Test
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*"
+  pull_request: {}
+jobs:
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: GitHub Release Download
+        uses: ./github-release-download
+        with:
+          repo: mesa-cli
+          tool: mesa
+          githubToken: ${{ secrets.CI_GITHUB_TOKEN }}
+      - run: mesa --version

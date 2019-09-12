@@ -1,0 +1,27 @@
+name: GitHub Release Download
+author: acst
+description: Downloads a GitHub release from a repository and can add folders to the path
+inputs:
+  owner:
+    description: GitHub owner the repository exists in
+    required: false
+    default: acst
+  repo:
+    description: GitHub repository to get the release from (defaults to the value of the tool argument)
+    required: false
+  tag:
+    description: Which tag of the release to download
+    required: false
+    default: latest
+  tool:
+    description: Tool to download. This is used to determine the release artifact name
+    required: true
+  githubToken:
+    description: Token used to download releases from private repositories
+    required: true
+runs:
+  using: node12
+  main: lib/index.js
+branding:
+  color: purple
+  icon: download
