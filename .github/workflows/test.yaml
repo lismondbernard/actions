@@ -20,3 +20,14 @@ jobs:
           tool: mesa
           githubToken: ${{ secrets.CI_GITHUB_TOKEN }}
       - run: mesa --version
+      - name: Set Environment
+        uses: ./set-environment-variables
+        env:
+          RANDOM_ENV: foo
+          ANOTHER_VAR: bar
+        with:
+          variables: RANDOM_ENV,ANOTHER_VAR
+      - name: Read Environment
+        run: |
+          [ "$RANDOM_ENV" = "foo" ]
+          [ "$ANOTHER_VAR" = "bar" ]

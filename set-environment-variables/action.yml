@@ -1,0 +1,13 @@
+name: Set Environment Variables
+author: acst
+description: Takes a set of environment variables from this step and adds them to the environment
+inputs:
+  variables:
+    description: Environment variable names (comma separated list with no spaces) to setup
+    required: true
+runs:
+  using: node12
+  main: lib/index.js
+branding:
+  color: purple
+  icon: book-open
