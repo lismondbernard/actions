@@ -2,7 +2,7 @@ import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as httpm from "typed-rest-client/HttpClient";
 
-const githubToken = core.getInput("githubToken");
+const githubToken = core.getInput("github_token");
 
 class AcstGitHub {
   private token: string;

@@ -10,7 +10,8 @@ async function run() {
     if (!repo) {
       repo = tool;
     }
-    await release.getTool(owner, repo, tag, tool);
+    const bin = core.getInput("bin");
+    await release.getTool(owner, repo, tag, tool, bin);
   } catch (error) {
     core.setFailed(error.message);
   }

@@ -16,9 +16,23 @@ inputs:
   tool:
     description: Tool to download. This is used to determine the release artifact name
     required: true
-  githubToken:
+  github_token:
     description: Token used to download releases from private repositories
     required: true
+  bin:
+    description: Location of the directory to add to PATH
+    required: false
+  release_format:
+    description: The format of the release file without the extension
+    required: false
+    default: $TOOL-$OS-$ARCH
+  has_root_folder:
+    description: Is the release compressed with a root folder in it (a folder with the same name as the compressed filename).
+    required: false
+    default: false
+outputs:
+  download_path:
+    description: Location of the uncompressed files
 runs:
   using: node12
   main: lib/index.js

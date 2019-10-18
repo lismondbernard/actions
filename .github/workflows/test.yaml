@@ -7,19 +7,41 @@ on:
       - "v*"
   pull_request: {}
 jobs:
-  test:
-    name: Testing
+  download:
+    name: Testing Download
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - name: GitHub Release Download
+      - name: GolangCI-Lint
+        id: release_download
+        uses: ./github-release-download
+        with:
+          tool: golangci-lint
+          owner: golangci
+          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+          release_format: $TOOL-$SVERSION-$OS-$ARCH
+          has_root_folder: true
+      - name: Mesa-CLI
         uses: ./github-release-download
         with:
           repo: mesa-cli
           tool: mesa
-          githubToken: ${{ secrets.CI_GITHUB_TOKEN }}
-      - run: mesa --version
+          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+          bin: bin
+      - name: Assert Release Download
+        env:
+          RELEASE_PATH: ${{ steps.release_download.outputs.download_path }}
+        run: |
+          echo $RELEASE_PATH
+          golangci-lint --version
+          mesa --version
+  environment:
+    name: Testing Environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
       - name: Set Environment
         uses: ./set-environment-variables
         env:

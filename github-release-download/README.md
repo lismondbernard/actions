@@ -2,14 +2,15 @@
 
 This action is used to download an artifact from a GitHub repository release.
 
-It is expecting a few things in order to be used appropriately.
+## release_format parameters
 
-1. The format of the artifact needs to be `$tool-$os-$arch.$comp`
-   - `$tool` is the argument passed into this action
-   - `$os` is one of `windows`, `linux`, or `darwin`
-   - `$arch` is one of `amd64` or `386`
-   - `$comp` is `tar.gz` for `linux` and `darwin` OSs and `zip` for `windows`
-2. To add something to the PATH, the archive needs to have a `bin/` directory with everything you want on the PATH in it.
+- `$OS` - is one of `windows`, `linux`, or `darwin`
+- `$ARCH` - is one of `amd64` or `386`
+- `$TOOL` - is the argument passed into this action
+- `$VERSION` - the tag version used (`latest` will get resolved to the latest tag name)
+- `$SVERSION` - `$VERSION` but with `v` removed from the beginning
+
+> the `release_format` will get suffixed with either `.zip` or `.tar.gz` depending on the operating system.
 
 ## Developing
 

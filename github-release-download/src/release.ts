@@ -31,7 +31,8 @@ export async function getTool(
   owner: string,
   repo: string,
   tag: string,
-  tool: string
+  tool: string,
+  bin: string
 ) {
   let toolPath: string;
   let release: Release;
@@ -44,11 +45,21 @@ export async function getTool(
 
     throw `Failed to download ${tool}@${tag}: ${err}`;
   }
-  let possiblePath = path.join(toolPath, "bin");
-  if (fs.existsSync(possiblePath)) {
-    core.debug(`Adding ${possiblePath} to the path`);
-    core.addPath(possiblePath);
+  if (bin === "") {
+    addToPath(toolPath);
+  } else {
+    let possiblePath = path.join(toolPath, bin);
+    if (fs.existsSync(possiblePath)) {
+      addToPath(possiblePath);
+    }
   }
+
+  core.setOutput("download_path", toolPath);
+}
+
+function addToPath(path: string) {
+  core.debug(`Adding ${path} to the path`);
+  core.addPath(path);
 }
 
 class Repository {
@@ -129,6 +140,12 @@ class Release {
       } else {
         extPath = await tc.extractTar(downloadPath);
       }
+      if (core.getInput("has_root_folder") === "true") {
+        extPath = path.join(
+          extPath,
+          getFileNameWithoutExtension(tool, this.tag)
+        );
+      }
       toolPath = await tc.cacheDir(extPath, tool, this.tag);
       core.debug(`${tool} was cached under ${toolPath}`);
     }
@@ -136,7 +153,7 @@ class Release {
   }
 
   private findTool(tool: string): ReleaseAsset {
-    let filename = getFileName(tool);
+    let filename = getFileName(tool, this.tag);
     if (!(filename in this.assets)) {
       throw `Unable to find ${filename} in listed assets`;
     }
@@ -209,9 +226,21 @@ class ReleaseAsset {
   }
 }
 
-function getFileName(tool: string): string {
+function getFileName(tool: string, version: string): string {
+  const ext: string = osPlat == "win32" ? "zip" : "tar.gz";
+  return getFileNameWithoutExtension(tool, version) + `.${ext}`;
+}
+
+function getFileNameWithoutExtension(tool: string, version: string): string {
+  const fmt = core.getInput("release_format");
+  const stripped_version =
+    version[0] === "v" ? version.slice(1, version.length) : version;
   const os: string = osPlat == "win32" ? "windows" : osPlat;
   const arch: string = osArch == "x64" ? "amd64" : "386";
-  const ext: string = osPlat == "win32" ? "zip" : "tar.gz";
-  return `${tool}-${os}-${arch}.${ext}`;
+  return fmt
+    .replace("$OS", os)
+    .replace("$ARCH", arch)
+    .replace("$TOOL", tool)
+    .replace("$VERSION", version)
+    .replace("$SVERSION", stripped_version);
 }
