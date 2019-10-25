@@ -1,0 +1,13 @@
+name: Setup Terraform
+author: acst
+description: Installs terraform for a specific version
+inputs:
+  version:
+    description: Version of Terraform to install
+    required: true
+runs:
+  using: node12
+  main: lib/index.js
+branding:
+  color: purple
+  icon: terminal

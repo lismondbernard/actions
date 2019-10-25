@@ -53,3 +53,16 @@ jobs:
         run: |
           [ "$RANDOM_ENV" = "foo" ]
           [ "$ANOTHER_VAR" = "bar" ]
+
+  terraform:
+    name: Testing Terraform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Get Terraform
+        uses: ./setup-terraform
+        with:
+          version: v0.12.12
+      - name: Assert Terraform on PATH
+        run: terraform --version
