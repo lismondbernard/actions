@@ -19,21 +19,21 @@
   "author": "acst",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@actions/core": "^1.1.0",
+    "@actions/core": "^1.2.0",
     "@actions/github": "^1.1.0",
     "@actions/io": "^1.0.1",
-    "@actions/tool-cache": "^1.1.1",
+    "@actions/tool-cache": "^1.1.2",
     "typed-rest-client": "^1.5.0",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.5",
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.7",
     "@types/uuid": "^3.4.5",
     "@zeit/ncc": "^0.20.5",
     "jest": "^24.9.0",
     "jest-circus": "^24.9.0",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
   }
 }
