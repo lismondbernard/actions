@@ -19,8 +19,8 @@ class AcstGitHub {
       maxRetries: 3
     });
     url = `${url}?access_token=${this.token}`; //Can't be a header as when a redirect happens we don't reauthenticate
-    res =  http.get(url, {});
-    print(res.message.statusCode);
+    let res =  http.get(url, {});
+    console.log(res.message.statusCode);
   }
 }
 
