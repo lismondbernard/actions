@@ -20,7 +20,7 @@ class AcstGitHub {
     });
     url = `${url}?access_token=${this.token}`; //Can't be a header as when a redirect happens we don't reauthenticate
     let res =  http.get(url, {});
-    debug("response:" + res.message.statusCode);
+    console.log(`response: ${res.message.statusCode}`);
   }
 }
 
