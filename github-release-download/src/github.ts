@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as httpm from "typed-rest-client/HttpClient";
+import * as hm from 'typed-rest-client/Handlers';
 
 const githubToken = core.getInput("github_token");
 
@@ -13,13 +14,14 @@ class AcstGitHub {
   }
 
   async downloadFromUrl(url: string): Promise<httpm.HttpClientResponse> {
-    const http = new httpm.HttpClient("acst/github-release-download", [], {
+    const bh = new hm.PersonalAccessTokenCredentialHandler(this.token);
+    const http = new httpm.HttpClient("acst/github-release-download", [bh], {
       allowRedirects: false,
       allowRetries: true,
       maxRetries: 3
     });
     url = `${url}`; //Can't be a header as when a redirect happens we don't reauthenticate
-    return http.get(url, {});
+    return http.get(url);
   }
 }
 
