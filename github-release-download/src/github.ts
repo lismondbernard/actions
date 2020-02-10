@@ -18,7 +18,7 @@ class AcstGitHub {
       allowRetries: true,
       maxRetries: 3
     });
-    url = `${url}?access_token=${this.token}`; //Can't be a header as when a redirect happens we don't reauthenticate
+    url = `${url}`; //Can't be a header as when a redirect happens we don't reauthenticate
     let res =  http.get(url, {});
     core.debug(`response: ${res.message.statusCode}`);
   }
