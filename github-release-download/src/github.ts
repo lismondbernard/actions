@@ -19,8 +19,7 @@ class AcstGitHub {
       maxRetries: 3
     });
     url = `${url}`; //Can't be a header as when a redirect happens we don't reauthenticate
-    let res =  http.get(url, {});
-    core.debug(`response: ${res.message.statusCode}`);
+    return http.get(url, {});
   }
 }
 

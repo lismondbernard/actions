@@ -191,6 +191,7 @@ class ReleaseAsset {
         }
 
         let response = await GitHub.downloadFromUrl(this.url);
+        core.debug(`response: ${response.message.statusCode}`);
 
         if (response.message.statusCode !== 200) {
           const err = new tc.HTTPError(response.message.statusCode);
