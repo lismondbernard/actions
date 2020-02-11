@@ -16,7 +16,7 @@ class AcstGitHub {
   async downloadFromUrl(url: string): Promise<httpm.HttpClientResponse> {
     const bh = new hm.PersonalAccessTokenCredentialHandler(this.token);
     const http = new httpm.HttpClient("acst/github-release-download", [bh], {
-      allowRedirects: false,
+      allowRedirects: true,
       allowRetries: true,
       maxRetries: 3
     });
