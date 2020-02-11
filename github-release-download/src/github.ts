@@ -21,7 +21,9 @@ class AcstGitHub {
       maxRetries: 3
     });
     url = `${url}`; //Can't be a header as when a redirect happens we don't reauthenticate
-    return http.get(url);
+    return http.get(url, {
+      Accept: "application/octet-stream"
+    });
   }
 }
 
