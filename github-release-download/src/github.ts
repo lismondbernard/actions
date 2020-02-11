@@ -14,14 +14,14 @@ class AcstGitHub {
   }
 
   async downloadFromUrl(url: string): Promise<httpm.HttpClientResponse> {
-    const bh = new hm.PersonalAccessTokenCredentialHandler(this.token);
-    const http = new httpm.HttpClient("acst/github-release-download", [bh], {
+    const http = new httpm.HttpClient("acst/github-release-download", [], {
       allowRedirects: true,
       allowRetries: true,
       maxRetries: 3
     });
     return http.get(url, {
-      Accept: "application/octet-stream"
+      Accept: "application/octet-stream",
+      Authorization: `Token ${this.token}`
     });
   }
 }
