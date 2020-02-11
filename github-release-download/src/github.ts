@@ -21,7 +21,7 @@ class AcstGitHub {
     });
     return http.get(url, {
       Accept: "application/octet-stream",
-      Authorization: `Token ${this.token}`
+      Authorization: `token ${this.token}`
     });
   }
 }
