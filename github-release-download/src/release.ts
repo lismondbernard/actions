@@ -6,6 +6,7 @@ import * as io from "@actions/io";
 import * as fs from "fs";
 import uuidV4 from "uuid/v4";
 import * as path from "path";
+import * as util from 'util';
 
 let osPlat: string = os.platform();
 let osArch: string = os.arch();
@@ -193,7 +194,7 @@ class ReleaseAsset {
         // let response = await GitHub.downloadFromUrl(this.url);
         // let response = await GitHub.getReleaseAsset(this.release.repo.owner, this.release.repo.repo, this.id)
         let response = await GitHub.getReleaseAsset(this.release.repo.owner, this.release.repo.repo, this.id)
-        core.debug(`response: ${JSON.stringify(response.message)}`)
+        core.debug(`response: ${util.inspect(response.message)}`)
         if (response.message.statusCode !== 200) {
           const err = new tc.HTTPError(response.message.statusCode);
           core.debug(
