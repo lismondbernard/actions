@@ -27,14 +27,23 @@ class AcstGitHub {
   //   return await this.asset_rest.repos.getReleaseAsset({owner, repo, asset_id})
   // }
 
-  async getReleaseAsset(owner: string, repo: string, asset_id: number): Promise<any> {
-    return await this.rest.request({
+  async getReleaseAsset(owner: string, repo: string, asset_id: number): Promise<httpm.HttpClientResponse> {
+    const response = await this.rest.request({
       method: "GET",
       url: "/repos/:owner/:repo/releases/assets/:asset_id",
       owner: owner,
       repo: repo,
       asset_id: asset_id
     })
+
+    const browserUrl = response.data.browser_data_url
+
+    const http = new httpm.HttpClient("acst/github-release-download", [], {
+      allowRedirects: true,
+      allowRetries: true,
+      maxRetries: 3
+    });
+    return http.get(browserUrl, {});
   }
 }
 
