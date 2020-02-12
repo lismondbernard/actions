@@ -41,7 +41,10 @@ class AcstGitHub {
     const http = new httpm.HttpClient("acst/github-release-download", [], {
       allowRedirects: true,
       allowRetries: true,
-      maxRetries: 3
+      maxRetries: 3,
+      headers: {
+        'Authorization': `token ${this.token}`
+      }
     });
     return http.get(browserUrl, {});
   }
