@@ -25,8 +25,22 @@ class AcstGitHub {
     });
   }
 
+  // async getReleaseAsset(owner: string, repo: string, asset_id: number): Promise<any> {
+  //   return await this.asset_rest.repos.getReleaseAsset({owner, repo, asset_id})
+  // }
+
   async getReleaseAsset(owner: string, repo: string, asset_id: number): Promise<any> {
-    return await this.asset_rest.repos.getReleaseAsset({owner, repo, asset_id})
+    return await this.rest.request({
+      method: "GET",
+      url: "/repos/:owner/:repo/releases/assets/:asset_id",
+      headers: {
+        authorization: `token ${this.token}`,
+        accept: "application/octet-stream"
+      },
+      owner: owner,
+      repo: repo,
+      asset_id: asset_id
+    })
   }
 }
 
