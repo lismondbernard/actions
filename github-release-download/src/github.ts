@@ -7,11 +7,9 @@ const githubToken = core.getInput("github_token");
 class AcstGitHub {
   private token: string;
   rest: github.GitHub;
-  asset_rest: github.GitHub;
   constructor(token: string) {
     this.token = token;
     this.rest = new github.GitHub(token)
-    this.asset_rest = new github.GitHub(token, {headers: {Accept: 'application/octet-stream'}});
   }
 
   async downloadFromUrl(url: string): Promise<httpm.HttpClientResponse> {
