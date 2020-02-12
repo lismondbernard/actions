@@ -36,7 +36,7 @@ class AcstGitHub {
       asset_id: asset_id
     })
 
-    const browserUrl = response.data.browser_data_url
+    const browserUrl = response.data.browser_download_url
 
     const http = new httpm.HttpClient("acst/github-release-download", [], {
       allowRedirects: true,
