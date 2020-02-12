@@ -32,7 +32,6 @@ class AcstGitHub {
       method: "GET",
       url: "/repos/:owner/:repo/releases/assets/:asset_id",
       headers: {
-        authorization: `token ${this.token}`,
         accept: "application/octet-stream"
       },
       owner: owner,
