@@ -13,6 +13,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+      - name: Mesa-CLI
+        uses: ./github-release-download
+        with:
+          repo: mesa-cli
+          tool: mesa
+          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+          bin: bin        
       - name: GolangCI-Lint
         id: release_download
         uses: ./github-release-download
@@ -22,13 +29,6 @@ jobs:
           github_token: ${{ secrets.CI_GITHUB_TOKEN }}
           release_format: $TOOL-$SVERSION-$OS-$ARCH
           has_root_folder: true
-      - name: Mesa-CLI
-        uses: ./github-release-download
-        with:
-          repo: mesa-cli
-          tool: mesa
-          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
-          bin: bin
       - name: Assert Release Download
         env:
           RELEASE_PATH: ${{ steps.release_download.outputs.download_path }}
