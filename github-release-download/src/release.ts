@@ -193,7 +193,7 @@ class ReleaseAsset {
         // let response = await GitHub.downloadFromUrl(this.url);
         // let response = await GitHub.getReleaseAsset(this.release.repo.owner, this.release.repo.repo, this.id)
         let response = await GitHub.getReleaseAsset(this.release.repo.owner, this.release.repo.repo, this.id)
-
+        core.debug(`browser_url: ${response.message.url}`)
         if (response.message.statusCode !== 200) {
           const err = new tc.HTTPError(response.message.statusCode);
           core.debug(
