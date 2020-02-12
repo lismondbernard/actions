@@ -31,9 +31,6 @@ class AcstGitHub {
     return await this.rest.request({
       method: "GET",
       url: "/repos/:owner/:repo/releases/assets/:asset_id",
-      headers: {
-        accept: "application/octet-stream"
-      },
       owner: owner,
       repo: repo,
       asset_id: asset_id
