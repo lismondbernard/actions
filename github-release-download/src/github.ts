@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import * as httpm from "typed-rest-client/HttpClient";
+import * as util from 'util';
 
 const githubToken = core.getInput("github_token");
 
@@ -37,9 +38,10 @@ class AcstGitHub {
     })
 
     const browserUrl = response.data.browser_download_url
+    core.debug(`response.data: ${util.inspect(response.data)}`)
 
     const http = new httpm.HttpClient("acst/github-release-download", [], {
-      allowRedirects: true,
+      allowRedirects: false,
       allowRetries: true,
       maxRetries: 3,
       headers: {
