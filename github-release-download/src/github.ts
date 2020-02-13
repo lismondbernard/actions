@@ -19,10 +19,12 @@ class AcstGitHub {
       allowRetries: true,
       maxRetries: 3
     });
-    return http.get(url, {
-      Accept: "application/octet-stream",
+    const response = await http.get(url, {
+      // Accept: "application/octet-stream",
       Authorization: `token ${this.token}`
     });
+    core.debug(`response: ${util.inspect(response)}`)
+    return response
   }
 
   // async getReleaseAsset(owner: string, repo: string, asset_id: number): Promise<any> {
