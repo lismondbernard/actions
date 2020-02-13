@@ -6,7 +6,6 @@ import * as io from "@actions/io";
 import * as fs from "fs";
 import uuidV4 from "uuid/v4";
 import * as path from "path";
-import * as util from 'util';
 
 let osPlat: string = os.platform();
 let osArch: string = os.arch();

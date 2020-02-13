@@ -15,12 +15,13 @@ class AcstGitHub {
 
   async downloadFromUrl(url: string): Promise<httpm.HttpClientResponse> {
     const http = new httpm.HttpClient("acst/github-release-download", [], {
-      allowRedirects: true,
+      allowRedirects: false,
       allowRetries: true,
       maxRetries: 3
     });
     return http.get(url, {
       Accept: "application/octet-stream",
+      Authorization: `token ${this.token}`
     });
   }
 
