@@ -14,14 +14,18 @@ class AcstGitHub {
 
   async downloadFromUrl(url: string): Promise<httpm.HttpClientResponse> {
     const http = new httpm.HttpClient("acst/github-release-download", [], {
-      allowRedirects: true,
+      allowRedirects: false,
       allowRetries: true,
       maxRetries: 3
     });
-    url = `${url}?access_token=${this.token}`; //Can't be a header as when a redirect happens we don't reauthenticate
-    return http.get(url, {
-      Accept: "application/octet-stream"
+    var resp = await http.get(url, {
+      Accept: "application/octet-stream",
+      Authorization: `token ${this.token}`
     });
+    if (resp.message.statusCode == 302 && resp.message.headers.location) {
+      resp = await http.get(resp.message.headers.location);
+    }
+    return resp;
   }
 }
 
