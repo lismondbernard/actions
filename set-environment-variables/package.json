@@ -19,15 +19,15 @@
   "author": "acst",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@actions/core": "^1.2.0"
+    "@actions/core": "^1.2.4"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.19",
-    "@types/node": "^12.11.7",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.39",
     "@zeit/ncc": "^0.20.5",
-    "jest": "^24.9.0",
-    "jest-circus": "^24.9.0",
-    "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
+    "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
   }
 }
