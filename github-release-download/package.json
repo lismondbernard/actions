@@ -19,7 +19,7 @@
   "author": "acst",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^1.1.0",
     "@actions/io": "^1.0.2",
     "@actions/tool-cache": "^1.3.5",
