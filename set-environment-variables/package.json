@@ -19,7 +19,7 @@
   "author": "acst",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@actions/core": "^1.2.4"
+    "@actions/core": "^1.2.6"
   },
   "devDependencies": {
     "@types/jest": "^24.9.1",
