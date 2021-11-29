@@ -30,12 +30,18 @@ jobs:
           tool: mesa
           github_token: ${{ secrets.CI_GITHUB_TOKEN }}
           bin: bin
-      - name: Assert Release Download
+      - name: Assert Public Release Download
         env:
           RELEASE_PATH: ${{ steps.release_download.outputs.download_path }}
         run: |
           echo $RELEASE_PATH
           golangci-lint --version
+      - name: Assert Private Release Download
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]' # Only run private check for prs from repo not made by dependabot
+        env:
+          RELEASE_PATH: ${{ steps.release_download.outputs.download_path }}
+        run: |
+          echo $RELEASE_PATH
           mesa --version
   environment:
     name: Testing Environment
