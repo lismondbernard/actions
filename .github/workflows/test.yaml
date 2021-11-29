@@ -19,10 +19,11 @@ jobs:
         with:
           tool: golangci-lint
           owner: golangci
-          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           release_format: $TOOL-$SVERSION-$OS-$ARCH
           has_root_folder: true
       - name: Mesa-CLI
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]' # Only run private check for prs from repo not made by dependabot
         uses: ./github-release-download
         with:
           repo: mesa-cli
