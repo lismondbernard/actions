@@ -22,7 +22,7 @@
     "@actions/core": "^1.2.6"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.1",
+    "@types/jest": "^27.0.3",
     "@types/node": "^12.12.39",
     "@zeit/ncc": "^0.20.5",
     "jest": "^26.0.1",
