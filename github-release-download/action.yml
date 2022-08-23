@@ -34,7 +34,7 @@ outputs:
   download_path:
     description: Location of the uncompressed files
 runs:
-  using: node12
+  using: node16
   main: lib/index.js
 branding:
   color: purple
