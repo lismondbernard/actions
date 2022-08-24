@@ -59,8 +59,20 @@ async function acquireTerraform(version: string): Promise<string> {
 
 function getFileName(version: string): string {
   const platform: string = osPlat == "win32" ? "windows" : osPlat;
-  const arch: string = osArch == "x64" ? "amd64" : "386";
+  const arch: string = getArchitectureFileName(osArch);
   return `terraform_${version}_${platform}_${arch}.zip`;
+}
+
+function getArchitectureFileName(arch: string): string {
+  if (arch == "x64") {
+    return "amd64"
+  }
+
+  if (arch == "x32") {
+    return "386"
+  }
+
+  return arch
 }
 
 function getDownloadUrl(version: string): string {
