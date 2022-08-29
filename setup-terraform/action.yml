@@ -6,7 +6,7 @@ inputs:
     description: Version of Terraform to install
     required: true
 runs:
-  using: node12
+  using: node16
   main: lib/index.js
 branding:
   color: purple

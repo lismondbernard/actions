@@ -89,3 +89,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# OS files
+thumbs.db
+.DS_STORE
