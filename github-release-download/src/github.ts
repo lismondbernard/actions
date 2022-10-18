@@ -1,15 +1,16 @@
 import * as core from "@actions/core";
-import * as github from "@actions/github";
+import { getOctokit } from '@actions/github';
+import { GitHub } from '@actions/github/lib/utils';
 import * as httpm from "typed-rest-client/HttpClient";
 
 const githubToken = core.getInput("github_token");
 
 class AcstGitHub {
   private token: string;
-  rest: github.GitHub;
+  client: InstanceType<typeof GitHub>;
   constructor(token: string) {
     this.token = token;
-    this.rest = new github.GitHub(token);
+    this.client = getOctokit(token);
   }
 
   async downloadFromUrl(url: string): Promise<httpm.HttpClientResponse> {
@@ -29,4 +30,4 @@ class AcstGitHub {
   }
 }
 
-export let GitHub: AcstGitHub = new AcstGitHub(githubToken);
+export let githubWrapper: AcstGitHub = new AcstGitHub(githubToken);

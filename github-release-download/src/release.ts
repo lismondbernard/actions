@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import { GitHub } from "./github";
+import { githubWrapper } from "./github";
 import * as os from "os";
 import * as tc from "@actions/tool-cache";
 import * as io from "@actions/io";
@@ -75,7 +75,7 @@ class Repository {
     let release: Release;
     core.debug(`Getting release for ${tag}`);
     if (tag === "latest") {
-      let ghRelease = await GitHub.rest.repos.getLatestRelease({
+      let ghRelease = await githubWrapper.client.rest.repos.getLatestRelease({
         owner: this.owner,
         repo: this.repo
       });
@@ -93,7 +93,7 @@ class Repository {
         {}
       );
     } else {
-      let ghRelease = await GitHub.rest.repos.getReleaseByTag({
+      let ghRelease = await githubWrapper.client.rest.repos.getReleaseByTag({
         owner: this.owner,
         repo: this.repo,
         tag: tag
@@ -190,7 +190,7 @@ class ReleaseAsset {
           throw new Error(`Destination file path ${destPath} already exists`);
         }
 
-        let response = await GitHub.downloadFromUrl(this.url);
+        let response = await githubWrapper.downloadFromUrl(this.url);
 
         if (response.message.statusCode !== 200) {
           const err = new tc.HTTPError(response.message.statusCode);
