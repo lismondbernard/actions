@@ -13,6 +13,7 @@ if [ -d $MRPC_DIR ]; then
   tar zxvf mrpc-darwin-amd64.tar.gz
   echo $PATH
   cd $GITHUB_WORKSPACE
+  find . -name "protoc-gen-mesa-swift" -ls
   make protos
 else 
   echo "$MRPC_DIR does not exist"
