@@ -12,7 +12,7 @@ if [ -d $MRPC_DIR ]; then
   cd $MRPC_DIR
   tar zxvf mrpc-darwin-amd64.tar.gz
   echo $PATH
-  cd $GITHUB_ACTION_PATH
+  cd $GITHUB_WORKSPACE
   make protos
 else 
   echo "$MRPC_DIR does not exist"
