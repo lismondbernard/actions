@@ -12,6 +12,7 @@ if [ -d $MRPC_DIR ]; then
   cd mrpc
   tar zxvf mrpc-darwin-amd64.tar.gz
   echo $PATH
+  cd $HOME
   make protos
 else 
   echo "$MRPC_DIR does not exist"
