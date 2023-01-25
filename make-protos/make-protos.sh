@@ -9,10 +9,10 @@ if [ -z $MRPC_DIR ]; then
 fi
 
 if [ -d $MRPC_DIR ]; then
-  cd mrpc
+  cd $MRPC_DIR
   tar zxvf mrpc-darwin-amd64.tar.gz
   echo $PATH
-  cd $HOME
+  cd $GITHUB_ACTION_PATH
   make protos
 else 
   echo "$MRPC_DIR does not exist"
