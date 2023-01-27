@@ -73,3 +73,11 @@ jobs:
           version: v1.3.2
       - name: Assert Terraform on PATH
         run: terraform --version
+
+  make-protos:
+    name: Testing Make Protos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
